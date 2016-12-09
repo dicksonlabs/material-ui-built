@@ -4,33 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _simpleAssign = require('simple-assign');
 
@@ -49,6 +25,14 @@ var _transitions = require('../styles/transitions');
 var _transitions2 = _interopRequireDefault(_transitions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function getRelativeValue(value, min, max) {
   var clampedValue = Math.min(Math.max(min, value), max);
@@ -103,14 +87,15 @@ function getStyles(props, context) {
 }
 
 var CircularProgress = function (_Component) {
-  (0, _inherits3.default)(CircularProgress, _Component);
+  _inherits(CircularProgress, _Component);
 
   function CircularProgress() {
-    (0, _classCallCheck3.default)(this, CircularProgress);
-    return (0, _possibleConstructorReturn3.default)(this, (CircularProgress.__proto__ || (0, _getPrototypeOf2.default)(CircularProgress)).apply(this, arguments));
+    _classCallCheck(this, CircularProgress);
+
+    return _possibleConstructorReturn(this, (CircularProgress.__proto__ || Object.getPrototypeOf(CircularProgress)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(CircularProgress, [{
+  _createClass(CircularProgress, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.scalePath(this.refs.path);
@@ -179,14 +164,15 @@ var CircularProgress = function (_Component) {
           innerStyle = _props.innerStyle,
           size = _props.size,
           thickness = _props.thickness,
-          other = (0, _objectWithoutProperties3.default)(_props, ['style', 'innerStyle', 'size', 'thickness']);
+          other = _objectWithoutProperties(_props, ['style', 'innerStyle', 'size', 'thickness']);
+
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context);
 
       return _react2.default.createElement(
         'div',
-        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+        _extends({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
         _react2.default.createElement(
           'div',
           { ref: 'wrapper', style: prepareStyles((0, _simpleAssign2.default)(styles.wrapper, innerStyle)) },
@@ -211,21 +197,11 @@ var CircularProgress = function (_Component) {
       );
     }
   }]);
+
   return CircularProgress;
 }(_react.Component);
 
-CircularProgress.defaultProps = {
-  mode: 'indeterminate',
-  value: 0,
-  min: 0,
-  max: 100,
-  size: 40,
-  thickness: 3.5
-};
-CircularProgress.contextTypes = {
-  muiTheme: _react.PropTypes.object.isRequired
-};
-process.env.NODE_ENV !== "production" ? CircularProgress.propTypes = {
+CircularProgress.propTypes = {
   /**
    * Override the progress's color.
    */
@@ -263,5 +239,16 @@ process.env.NODE_ENV !== "production" ? CircularProgress.propTypes = {
    * The value of progress, only works in determinate mode.
    */
   value: _react.PropTypes.number
-} : void 0;
+};
+CircularProgress.defaultProps = {
+  mode: 'indeterminate',
+  value: 0,
+  min: 0,
+  max: 100,
+  size: 40,
+  thickness: 3.5
+};
+CircularProgress.contextTypes = {
+  muiTheme: _react.PropTypes.object.isRequired
+};
 exports.default = CircularProgress;

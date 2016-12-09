@@ -4,33 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _simpleAssign = require('simple-assign');
 
@@ -76,6 +52,14 @@ var _NestedList2 = _interopRequireDefault(_NestedList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function getStyles(props, context, state) {
   var insetChildren = props.insetChildren,
       leftAvatar = props.leftAvatar,
@@ -93,7 +77,7 @@ function getStyles(props, context, state) {
 
 
   var textColor = muiTheme.baseTheme.palette.textColor;
-  var hoverColor = props.hoverColor || (0, _colorManipulator.fade)(textColor, 0.1);
+  var hoverColor = (0, _colorManipulator.fade)(textColor, 0.1);
   var singleAvatar = !secondaryText && (leftAvatar || rightAvatar);
   var singleNoAvatar = !secondaryText && !(leftAvatar || rightAvatar);
   var twoLine = secondaryText && secondaryTextLines === 1;
@@ -201,20 +185,20 @@ function getStyles(props, context, state) {
 }
 
 var ListItem = function (_Component) {
-  (0, _inherits3.default)(ListItem, _Component);
+  _inherits(ListItem, _Component);
 
   function ListItem() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3.default)(this, ListItem);
+    _classCallCheck(this, ListItem);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ListItem.__proto__ || (0, _getPrototypeOf2.default)(ListItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ListItem.__proto__ || Object.getPrototypeOf(ListItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       hovered: false,
       isKeyboardFocused: false,
       open: false,
@@ -232,20 +216,9 @@ var ListItem = function (_Component) {
       _this.props.onMouseLeave(event);
     }, _this.handleNestedListToggle = function (event) {
       event.stopPropagation();
-
-      if (_this.props.open === null) {
-        _this.setState({ open: !_this.state.open }, function () {
-          _this.props.onNestedListToggle(_this);
-        });
-      } else {
-        // Exposing `this` in the callback is quite a bad API.
-        // I'm doing a one level deep clone to expose a fake state.open.
-        _this.props.onNestedListToggle((0, _extends3.default)({}, _this, {
-          state: {
-            open: !_this.state.open
-          }
-        }));
-      }
+      _this.setState({ open: !_this.state.open }, function () {
+        _this.props.onNestedListToggle(_this);
+      });
     }, _this.handleRightIconButtonKeyboardFocus = function (event, isKeyboardFocused) {
       if (isKeyboardFocused) {
         _this.setState({
@@ -278,13 +251,10 @@ var ListItem = function (_Component) {
     }, _this.handleTouchStart = function (event) {
       _this.setState({ touch: true });
       _this.props.onTouchStart(event);
-    }, _this.handleTouchEnd = function (event) {
-      _this.setState({ touch: true });
-      _this.props.onTouchEnd(event);
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  (0, _createClass3.default)(ListItem, [{
+  _createClass(ListItem, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.setState({
@@ -296,7 +266,6 @@ var ListItem = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       // update the state when the component is controlled.
       if (nextProps.open !== null) this.setState({ open: nextProps.open });
-      if (nextProps.disabled && this.state.hovered) this.setState({ hovered: false });
     }
   }, {
     key: 'shouldComponentUpdate',
@@ -340,7 +309,7 @@ var ListItem = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        (0, _extends3.default)({}, additionalProps, {
+        _extends({}, additionalProps, {
           style: this.context.muiTheme.prepareStyles(mergedDivStyles)
         }),
         contentChildren
@@ -358,7 +327,7 @@ var ListItem = function (_Component) {
 
       return _react2.default.createElement(
         'label',
-        (0, _extends3.default)({}, additionalProps, {
+        _extends({}, additionalProps, {
           style: this.context.muiTheme.prepareStyles(mergedLabelStyles)
         }),
         contentChildren
@@ -392,7 +361,7 @@ var ListItem = function (_Component) {
     value: function pushElement(children, element, baseStyles, additionalProps) {
       if (element) {
         var styles = (0, _simpleAssign2.default)({}, baseStyles, element.props.style);
-        children.push(_react2.default.cloneElement(element, (0, _extends3.default)({
+        children.push(_react2.default.cloneElement(element, _extends({
           key: children.length,
           style: styles
         }, additionalProps)));
@@ -406,7 +375,6 @@ var ListItem = function (_Component) {
           children = _props3.children,
           disabled = _props3.disabled,
           disableKeyboardFocus = _props3.disableKeyboardFocus,
-          hoverColor = _props3.hoverColor,
           initiallyOpen = _props3.initiallyOpen,
           innerDivStyle = _props3.innerDivStyle,
           insetChildren = _props3.insetChildren,
@@ -431,7 +399,8 @@ var ListItem = function (_Component) {
           secondaryText = _props3.secondaryText,
           secondaryTextLines = _props3.secondaryTextLines,
           style = _props3.style,
-          other = (0, _objectWithoutProperties3.default)(_props3, ['autoGenerateNestedIndicator', 'children', 'disabled', 'disableKeyboardFocus', 'hoverColor', 'initiallyOpen', 'innerDivStyle', 'insetChildren', 'leftAvatar', 'leftCheckbox', 'leftIcon', 'nestedItems', 'nestedLevel', 'nestedListStyle', 'onKeyboardFocus', 'onMouseEnter', 'onMouseLeave', 'onNestedListToggle', 'onTouchStart', 'onTouchTap', 'rightAvatar', 'rightIcon', 'rightIconButton', 'rightToggle', 'primaryText', 'primaryTogglesNestedList', 'secondaryText', 'secondaryTextLines', 'style']);
+          other = _objectWithoutProperties(_props3, ['autoGenerateNestedIndicator', 'children', 'disabled', 'disableKeyboardFocus', 'initiallyOpen', 'innerDivStyle', 'insetChildren', 'leftAvatar', 'leftCheckbox', 'leftIcon', 'nestedItems', 'nestedLevel', 'nestedListStyle', 'onKeyboardFocus', 'onMouseEnter', 'onMouseLeave', 'onNestedListToggle', 'onTouchStart', 'onTouchTap', 'rightAvatar', 'rightIcon', 'rightIconButton', 'rightToggle', 'primaryText', 'primaryTogglesNestedList', 'secondaryText', 'secondaryTextLines', 'style']);
+
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context, this.state);
@@ -516,22 +485,22 @@ var ListItem = function (_Component) {
         nestedItems
       ) : undefined;
 
-      var simpleLabel = !primaryTogglesNestedList && (leftCheckbox || rightToggle);
+      var hasCheckbox = leftCheckbox || rightToggle;
 
       return _react2.default.createElement(
         'div',
         null,
-        simpleLabel ? this.createLabelElement(styles, contentChildren, other) : disabled ? this.createDisabledElement(styles, contentChildren, other) : _react2.default.createElement(
+        hasCheckbox ? this.createLabelElement(styles, contentChildren, other) : disabled ? this.createDisabledElement(styles, contentChildren, other) : _react2.default.createElement(
           _EnhancedButton2.default,
-          (0, _extends3.default)({
+          _extends({
             containerElement: 'span'
           }, other, {
+            disabled: disabled,
             disableKeyboardFocus: disableKeyboardFocus || this.state.rightIconButtonKeyboardFocused,
             onKeyboardFocus: this.handleKeyboardFocus,
             onMouseLeave: this.handleMouseLeave,
             onMouseEnter: this.handleMouseEnter,
             onTouchStart: this.handleTouchStart,
-            onTouchEnd: this.handleTouchEnd,
             onTouchTap: primaryTogglesNestedList ? this.handleNestedListToggle : onTouchTap,
             ref: 'enhancedButton',
             style: (0, _simpleAssign2.default)({}, styles.root, style)
@@ -546,32 +515,12 @@ var ListItem = function (_Component) {
       );
     }
   }]);
+
   return ListItem;
 }(_react.Component);
 
 ListItem.muiName = 'ListItem';
-ListItem.defaultProps = {
-  autoGenerateNestedIndicator: true,
-  disableKeyboardFocus: false,
-  disabled: false,
-  initiallyOpen: false,
-  insetChildren: false,
-  nestedItems: [],
-  nestedLevel: 0,
-  onKeyboardFocus: function onKeyboardFocus() {},
-  onMouseEnter: function onMouseEnter() {},
-  onMouseLeave: function onMouseLeave() {},
-  onNestedListToggle: function onNestedListToggle() {},
-  onTouchEnd: function onTouchEnd() {},
-  onTouchStart: function onTouchStart() {},
-  open: null,
-  primaryTogglesNestedList: false,
-  secondaryTextLines: 1
-};
-ListItem.contextTypes = {
-  muiTheme: _react.PropTypes.object.isRequired
-};
-process.env.NODE_ENV !== "production" ? ListItem.propTypes = {
+ListItem.propTypes = {
   /**
    * If true, generate a nested-list-indicator icon when nested list
    * items are detected. Note that an indicator will not be created
@@ -594,10 +543,6 @@ process.env.NODE_ENV !== "production" ? ListItem.propTypes = {
    * or `rightToggle` is set.
    */
   disabled: _react.PropTypes.bool,
-  /**
-  * Override the hover background color.
-  */
-  hoverColor: _react.PropTypes.string,
   /**
    * If true, the nested `ListItem`s are initially displayed.
    */
@@ -654,8 +599,6 @@ process.env.NODE_ENV !== "production" ? ListItem.propTypes = {
    */
   onNestedListToggle: _react.PropTypes.func,
   /** @ignore */
-  onTouchEnd: _react.PropTypes.func,
-  /** @ignore */
   onTouchStart: _react.PropTypes.func,
   /** @ignore */
   onTouchTap: _react.PropTypes.func,
@@ -707,5 +650,25 @@ process.env.NODE_ENV !== "production" ? ListItem.propTypes = {
    * Override the inline-styles of the root element.
    */
   style: _react.PropTypes.object
-} : void 0;
+};
+ListItem.defaultProps = {
+  autoGenerateNestedIndicator: true,
+  disableKeyboardFocus: false,
+  disabled: false,
+  initiallyOpen: false,
+  insetChildren: false,
+  nestedItems: [],
+  nestedLevel: 0,
+  onKeyboardFocus: function onKeyboardFocus() {},
+  onMouseEnter: function onMouseEnter() {},
+  onMouseLeave: function onMouseLeave() {},
+  onNestedListToggle: function onNestedListToggle() {},
+  onTouchStart: function onTouchStart() {},
+  open: null,
+  primaryTogglesNestedList: false,
+  secondaryTextLines: 1
+};
+ListItem.contextTypes = {
+  muiTheme: _react.PropTypes.object.isRequired
+};
 exports.default = ListItem;

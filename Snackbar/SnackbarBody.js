@@ -5,13 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SnackbarBody = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _simpleAssign = require('simple-assign');
 
@@ -34,6 +28,8 @@ var _FlatButton = require('../FlatButton');
 var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function getStyles(props, context) {
   var open = props.open,
@@ -62,8 +58,8 @@ function getStyles(props, context) {
       borderRadius: isSmall ? 0 : 2,
       maxWidth: isSmall ? 'inherit' : 568,
       minWidth: isSmall ? 'inherit' : 288,
-      width: isSmall ? 'calc(100vw - ' + desktopGutter * 2 + 'px)' : 'auto',
-      flexGrow: isSmall ? 1 : 0
+      flexGrow: isSmall ? 1 : 0,
+      margin: 'auto'
     },
     content: {
       fontSize: 14,
@@ -85,13 +81,13 @@ function getStyles(props, context) {
 }
 
 var SnackbarBody = exports.SnackbarBody = function SnackbarBody(props, context) {
-  var action = props.action,
-      contentStyle = props.contentStyle,
+  var open = props.open,
+      action = props.action,
       message = props.message,
-      open = props.open,
       onActionTouchTap = props.onActionTouchTap,
       style = props.style,
-      other = (0, _objectWithoutProperties3.default)(props, ['action', 'contentStyle', 'message', 'open', 'onActionTouchTap', 'style']);
+      other = _objectWithoutProperties(props, ['open', 'action', 'message', 'onActionTouchTap', 'style']);
+
   var prepareStyles = context.muiTheme.prepareStyles;
 
   var styles = getStyles(props, context);
@@ -104,10 +100,10 @@ var SnackbarBody = exports.SnackbarBody = function SnackbarBody(props, context) 
 
   return _react2.default.createElement(
     'div',
-    (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+    _extends({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
     _react2.default.createElement(
       'div',
-      { style: prepareStyles((0, _simpleAssign2.default)(styles.content, contentStyle)) },
+      { style: prepareStyles(styles.content) },
       _react2.default.createElement(
         'span',
         null,
@@ -118,15 +114,11 @@ var SnackbarBody = exports.SnackbarBody = function SnackbarBody(props, context) 
   );
 };
 
-process.env.NODE_ENV !== "production" ? SnackbarBody.propTypes = {
+SnackbarBody.propTypes = {
   /**
    * The label for the action on the snackbar.
    */
   action: _react.PropTypes.node,
-  /**
-   * Override the inline-styles of the content element.
-   */
-  contentStyle: _react.PropTypes.object,
   /**
    * The message to be displayed.
    *
@@ -155,7 +147,7 @@ process.env.NODE_ENV !== "production" ? SnackbarBody.propTypes = {
    * Width of the screen.
    */
   width: _react.PropTypes.number.isRequired
-} : void 0;
+};
 
 SnackbarBody.contextTypes = {
   muiTheme: _react.PropTypes.object.isRequired

@@ -4,33 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _simpleAssign = require('simple-assign');
 
@@ -66,6 +42,14 @@ var _Menu2 = _interopRequireDefault(_Menu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var nestedMenuStyle = {
   position: 'relative'
 };
@@ -73,22 +57,21 @@ var nestedMenuStyle = {
 function getStyles(props, context) {
   var disabledColor = context.muiTheme.baseTheme.palette.disabledColor;
   var textColor = context.muiTheme.baseTheme.palette.textColor;
-  var indent = props.desktop ? 64 : 72;
+  var leftIndent = props.desktop ? 64 : 72;
   var sidePadding = props.desktop ? 24 : 16;
 
   var styles = {
     root: {
       color: props.disabled ? disabledColor : textColor,
       cursor: props.disabled ? 'not-allowed' : 'pointer',
-      minHeight: props.desktop ? '32px' : '48px',
       lineHeight: props.desktop ? '32px' : '48px',
       fontSize: props.desktop ? 15 : 16,
       whiteSpace: 'nowrap'
     },
 
     innerDivStyle: {
-      paddingLeft: props.leftIcon || props.insetChildren || props.checked ? indent : sidePadding,
-      paddingRight: props.rightIcon ? indent : sidePadding,
+      paddingLeft: props.leftIcon || props.insetChildren || props.checked ? leftIndent : sidePadding,
+      paddingRight: sidePadding,
       paddingBottom: 0,
       paddingTop: 0
     },
@@ -115,20 +98,20 @@ function getStyles(props, context) {
 }
 
 var MenuItem = function (_Component) {
-  (0, _inherits3.default)(MenuItem, _Component);
+  _inherits(MenuItem, _Component);
 
   function MenuItem() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3.default)(this, MenuItem);
+    _classCallCheck(this, MenuItem);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuItem.__proto__ || (0, _getPrototypeOf2.default)(MenuItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MenuItem.__proto__ || Object.getPrototypeOf(MenuItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       open: false
     }, _this.cloneMenuItem = function (item) {
       return _react2.default.cloneElement(item, {
@@ -158,10 +141,10 @@ var MenuItem = function (_Component) {
         open: false,
         anchorEl: null
       });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  (0, _createClass3.default)(MenuItem, [{
+  _createClass(MenuItem, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.applyFocusState();
@@ -215,7 +198,8 @@ var MenuItem = function (_Component) {
           style = _props.style,
           animation = _props.animation,
           value = _props.value,
-          other = (0, _objectWithoutProperties3.default)(_props, ['checked', 'children', 'desktop', 'disabled', 'focusState', 'innerDivStyle', 'insetChildren', 'leftIcon', 'menuItems', 'rightIcon', 'secondaryText', 'style', 'animation', 'value']);
+          other = _objectWithoutProperties(_props, ['checked', 'children', 'desktop', 'disabled', 'focusState', 'innerDivStyle', 'insetChildren', 'leftIcon', 'menuItems', 'rightIcon', 'secondaryText', 'style', 'animation', 'value']);
+
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context);
@@ -271,9 +255,8 @@ var MenuItem = function (_Component) {
 
       return _react2.default.createElement(
         _ListItem2.default,
-        (0, _extends3.default)({}, other, {
+        _extends({}, other, {
           disabled: disabled,
-          hoverColor: this.context.muiTheme.menuItem.hoverColor,
           innerDivStyle: mergedInnerDivStyles,
           insetChildren: insetChildren,
           leftIcon: leftIconElement,
@@ -287,21 +270,12 @@ var MenuItem = function (_Component) {
       );
     }
   }]);
+
   return MenuItem;
 }(_react.Component);
 
 MenuItem.muiName = 'MenuItem';
-MenuItem.defaultProps = {
-  checked: false,
-  desktop: false,
-  disabled: false,
-  focusState: 'none',
-  insetChildren: false
-};
-MenuItem.contextTypes = {
-  muiTheme: _react.PropTypes.object.isRequired
-};
-process.env.NODE_ENV !== "production" ? MenuItem.propTypes = {
+MenuItem.propTypes = {
   /**
    * Override the default animation component used.
    */
@@ -372,5 +346,15 @@ process.env.NODE_ENV !== "production" ? MenuItem.propTypes = {
    * The value of the menu item.
    */
   value: _react.PropTypes.any
-} : void 0;
+};
+MenuItem.defaultProps = {
+  checked: false,
+  desktop: false,
+  disabled: false,
+  focusState: 'none',
+  insetChildren: false
+};
+MenuItem.contextTypes = {
+  muiTheme: _react.PropTypes.object.isRequired
+};
 exports.default = MenuItem;

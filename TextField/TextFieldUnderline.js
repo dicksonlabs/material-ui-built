@@ -84,9 +84,7 @@ var TextFieldUnderline = function TextFieldUnderline(props) {
 
   var styles = {
     root: {
-      borderTop: 'none',
-      borderLeft: 'none',
-      borderRight: 'none',
+      border: 'none',
       borderBottom: 'solid 1px',
       borderColor: borderColor,
       bottom: 8,
@@ -97,7 +95,8 @@ var TextFieldUnderline = function TextFieldUnderline(props) {
     },
     disabled: {
       borderBottom: 'dotted 2px',
-      borderColor: disabledTextColor
+      borderColor: disabledTextColor,
+      cursor: 'not-allowed'
     },
     focus: {
       borderBottom: 'solid 2px',
@@ -126,7 +125,7 @@ var TextFieldUnderline = function TextFieldUnderline(props) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? TextFieldUnderline.propTypes = propTypes : void 0;
+TextFieldUnderline.propTypes = propTypes;
 TextFieldUnderline.defaultProps = defaultProps;
 
 exports.default = TextFieldUnderline;

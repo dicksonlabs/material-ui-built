@@ -4,33 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _simpleAssign = require('simple-assign');
 
@@ -74,26 +50,34 @@ var _reactAddonsTransitionGroup2 = _interopRequireDefault(_reactAddonsTransition
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var TransitionItem = function (_Component) {
-  (0, _inherits3.default)(TransitionItem, _Component);
+  _inherits(TransitionItem, _Component);
 
   function TransitionItem() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3.default)(this, TransitionItem);
+    _classCallCheck(this, TransitionItem);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = TransitionItem.__proto__ || (0, _getPrototypeOf2.default)(TransitionItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TransitionItem.__proto__ || Object.getPrototypeOf(TransitionItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       style: {}
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  (0, _createClass3.default)(TransitionItem, [{
+  _createClass(TransitionItem, [{
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       clearTimeout(this.enterTimeout);
@@ -136,27 +120,29 @@ var TransitionItem = function (_Component) {
       var _props = this.props,
           style = _props.style,
           children = _props.children,
-          other = (0, _objectWithoutProperties3.default)(_props, ['style', 'children']);
+          other = _objectWithoutProperties(_props, ['style', 'children']);
+
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
 
       return _react2.default.createElement(
         'div',
-        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, this.state.style, style)) }),
+        _extends({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, this.state.style, style)) }),
         children
       );
     }
   }]);
+
   return TransitionItem;
 }(_react.Component);
 
+TransitionItem.propTypes = {
+  children: _react.PropTypes.node,
+  style: _react.PropTypes.object
+};
 TransitionItem.contextTypes = {
   muiTheme: _react.PropTypes.object.isRequired
 };
-process.env.NODE_ENV !== "production" ? TransitionItem.propTypes = {
-  children: _react.PropTypes.node,
-  style: _react.PropTypes.object
-} : void 0;
 
 
 function getStyles(props, context) {
@@ -228,20 +214,20 @@ function getStyles(props, context) {
 }
 
 var DialogInline = function (_Component2) {
-  (0, _inherits3.default)(DialogInline, _Component2);
+  _inherits(DialogInline, _Component2);
 
   function DialogInline() {
     var _ref2;
 
     var _temp2, _this2, _ret2;
 
-    (0, _classCallCheck3.default)(this, DialogInline);
+    _classCallCheck(this, DialogInline);
 
     for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
 
-    return _ret2 = (_temp2 = (_this2 = (0, _possibleConstructorReturn3.default)(this, (_ref2 = DialogInline.__proto__ || (0, _getPrototypeOf2.default)(DialogInline)).call.apply(_ref2, [this].concat(args))), _this2), _this2.handleTouchTapOverlay = function () {
+    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = DialogInline.__proto__ || Object.getPrototypeOf(DialogInline)).call.apply(_ref2, [this].concat(args))), _this2), _this2.handleTouchTapOverlay = function () {
       _this2.requestClose(false);
     }, _this2.handleKeyUp = function (event) {
       if ((0, _keycode2.default)(event) === 'esc') {
@@ -249,10 +235,10 @@ var DialogInline = function (_Component2) {
       }
     }, _this2.handleResize = function () {
       _this2.positionDialog();
-    }, _temp2), (0, _possibleConstructorReturn3.default)(_this2, _ret2);
+    }, _temp2), _possibleConstructorReturn(_this2, _ret2);
   }
 
-  (0, _createClass3.default)(DialogInline, [{
+  _createClass(DialogInline, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.positionDialog();
@@ -426,13 +412,11 @@ var DialogInline = function (_Component2) {
       );
     }
   }]);
+
   return DialogInline;
 }(_react.Component);
 
-DialogInline.contextTypes = {
-  muiTheme: _react.PropTypes.object.isRequired
-};
-process.env.NODE_ENV !== "production" ? DialogInline.propTypes = {
+DialogInline.propTypes = {
   actions: _react.PropTypes.node,
   actionsContainerClassName: _react.PropTypes.string,
   actionsContainerStyle: _react.PropTypes.object,
@@ -454,46 +438,41 @@ process.env.NODE_ENV !== "production" ? DialogInline.propTypes = {
   title: _react.PropTypes.node,
   titleClassName: _react.PropTypes.string,
   titleStyle: _react.PropTypes.object
-} : void 0;
+};
+DialogInline.contextTypes = {
+  muiTheme: _react.PropTypes.object.isRequired
+};
 
 var Dialog = function (_Component3) {
-  (0, _inherits3.default)(Dialog, _Component3);
+  _inherits(Dialog, _Component3);
 
   function Dialog() {
     var _ref3;
 
     var _temp3, _this3, _ret3;
 
-    (0, _classCallCheck3.default)(this, Dialog);
+    _classCallCheck(this, Dialog);
 
     for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
       args[_key3] = arguments[_key3];
     }
 
-    return _ret3 = (_temp3 = (_this3 = (0, _possibleConstructorReturn3.default)(this, (_ref3 = Dialog.__proto__ || (0, _getPrototypeOf2.default)(Dialog)).call.apply(_ref3, [this].concat(args))), _this3), _this3.renderLayer = function () {
+    return _ret3 = (_temp3 = (_this3 = _possibleConstructorReturn(this, (_ref3 = Dialog.__proto__ || Object.getPrototypeOf(Dialog)).call.apply(_ref3, [this].concat(args))), _this3), _this3.renderLayer = function () {
       return _react2.default.createElement(DialogInline, _this3.props);
-    }, _temp3), (0, _possibleConstructorReturn3.default)(_this3, _ret3);
+    }, _temp3), _possibleConstructorReturn(_this3, _ret3);
   }
 
-  (0, _createClass3.default)(Dialog, [{
+  _createClass(Dialog, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(_RenderToLayer2.default, { render: this.renderLayer, open: true, useLayerForClickAway: false });
     }
   }]);
+
   return Dialog;
 }(_react.Component);
 
-Dialog.contextTypes = {
-  muiTheme: _react.PropTypes.object.isRequired
-};
-Dialog.defaultProps = {
-  autoDetectWindowHeight: true,
-  autoScrollBodyContent: false,
-  modal: false,
-  repositionOnUpdate: true
-};
-process.env.NODE_ENV !== "production" ? Dialog.propTypes = {
+Dialog.propTypes = {
   /**
    * Action buttons to display below the Dialog content (`children`).
    * This property accepts either a React element, or an array of React elements.
@@ -583,5 +562,14 @@ process.env.NODE_ENV !== "production" ? Dialog.propTypes = {
    * Overrides the inline-styles of the title's root container element.
    */
   titleStyle: _react.PropTypes.object
-} : void 0;
+};
+Dialog.contextTypes = {
+  muiTheme: _react.PropTypes.object.isRequired
+};
+Dialog.defaultProps = {
+  autoDetectWindowHeight: true,
+  autoScrollBodyContent: false,
+  modal: false,
+  repositionOnUpdate: true
+};
 exports.default = Dialog;

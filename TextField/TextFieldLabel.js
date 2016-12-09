@@ -25,6 +25,7 @@ function getStyles(props) {
     top: 38,
     transition: _transitions2.default.easeOut(),
     zIndex: 1, // Needed to display label above Chrome's autocomplete field background
+    cursor: props.disabled ? 'not-allowed' : 'text',
     transform: 'scale(1) translate(0, 0)',
     transformOrigin: 'left top',
     pointerEvents: 'auto',
@@ -63,7 +64,7 @@ var TextFieldLabel = function TextFieldLabel(props) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? TextFieldLabel.propTypes = {
+TextFieldLabel.propTypes = {
   /**
    * The label contents.
    */
@@ -94,14 +95,14 @@ process.env.NODE_ENV !== "production" ? TextFieldLabel.propTypes = {
    */
   shrink: _react.PropTypes.bool,
   /**
-   * Override the inline-styles of the root element when shrunk.
+   * Override the inline-styles of the root element when focused.
    */
   shrinkStyle: _react.PropTypes.object,
   /**
    * Override the inline-styles of the root element.
    */
   style: _react.PropTypes.object
-} : void 0;
+};
 
 TextFieldLabel.defaultProps = {
   disabled: false,
