@@ -395,7 +395,6 @@ var Menu = function (_Component) {
           children = _props2.children,
           desktop = _props2.desktop,
           disableAutoFocus = _props2.disableAutoFocus,
-          dividerStyle = _props2.dividerStyle,
           initiallyKeyboardFocused = _props2.initiallyKeyboardFocused,
           listStyle = _props2.listStyle,
           maxHeight = _props2.maxHeight,
@@ -407,14 +406,13 @@ var Menu = function (_Component) {
           value = _props2.value,
           valueLink = _props2.valueLink,
           width = _props2.width,
-          other = (0, _objectWithoutProperties3.default)(_props2, ['autoWidth', 'children', 'desktop', 'disableAutoFocus', 'dividerStyle', 'initiallyKeyboardFocused', 'listStyle', 'maxHeight', 'multiple', 'onItemTouchTap', 'onEscKeyDown', 'selectedMenuItemStyle', 'style', 'value', 'valueLink', 'width']);
+          other = (0, _objectWithoutProperties3.default)(_props2, ['autoWidth', 'children', 'desktop', 'disableAutoFocus', 'initiallyKeyboardFocused', 'listStyle', 'maxHeight', 'multiple', 'onItemTouchTap', 'onEscKeyDown', 'selectedMenuItemStyle', 'style', 'value', 'valueLink', 'width']);
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context);
 
       var mergedRootStyles = (0, _simpleAssign2.default)(styles.root, style);
       var mergedListStyles = (0, _simpleAssign2.default)(styles.list, listStyle);
-      var mergedDividerStyles = (0, _simpleAssign2.default)(styles.divider, dividerStyle);
 
       var filteredChildren = this.getFilteredChildren(children);
 
@@ -423,7 +421,9 @@ var Menu = function (_Component) {
         var childIsADivider = child.type && child.type.muiName === 'Divider';
         var childIsDisabled = child.props.disabled;
 
-        var clonedChild = childIsADivider ? _react2.default.cloneElement(child, { style: mergedDividerStyles }) : childIsDisabled ? _react2.default.cloneElement(child, { desktop: desktop }) : _this4.cloneMenuItem(child, menuItemIndex, styles, index);
+        var clonedChild = childIsADivider ? _react2.default.cloneElement(child, {
+          style: (0, _simpleAssign2.default)({}, styles.divider, child.props.style)
+        }) : childIsDisabled ? _react2.default.cloneElement(child, { desktop: desktop }) : _this4.cloneMenuItem(child, menuItemIndex, styles, index);
 
         if (!childIsADivider && !childIsDisabled) {
           menuItemIndex++;
@@ -562,10 +562,6 @@ process.env.NODE_ENV !== "production" ? Menu.propTypes = {
    * If true, the menu will not be auto-focused.
    */
   disableAutoFocus: _react.PropTypes.bool,
-  /**
-   * Override the inline-styles of the optional `Divider` elements between `MenuItem` elements.
-   */
-  dividerStyle: _react.PropTypes.object,
   /**
    * If true, the menu will be keyboard-focused initially.
    */
