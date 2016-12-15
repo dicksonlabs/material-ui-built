@@ -36,11 +36,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function getRelativeValue(value, min, max) {
   var clampedValue = Math.min(Math.max(min, value), max);
-  return clampedValue / (max - min);
-}
-
-function getArcLength(fraction, props) {
-  return fraction * Math.PI * (props.size - props.thickness);
+  var rangeValue = max - min;
+  var relValue = Math.round(clampedValue / rangeValue * 10000) / 10000;
+  return relValue * 100;
 }
 
 function getStyles(props, context) {
@@ -50,27 +48,36 @@ function getStyles(props, context) {
       value = props.value;
   var palette = context.muiTheme.baseTheme.palette;
 
+  var zoom = size * 1.4;
+  var baseSize = 50;
+  var margin = Math.round((50 * zoom - 50) / 2);
+
+  if (margin < 0) margin = 0;
 
   var styles = {
     root: {
       position: 'relative',
+      margin: margin,
       display: 'inline-block',
-      width: size,
-      height: size
+      width: baseSize,
+      height: baseSize
     },
     wrapper: {
-      width: size,
-      height: size,
+      width: baseSize,
+      height: baseSize,
       display: 'inline-block',
       transition: _transitions2.default.create('transform', '20s', null, 'linear'),
       transitionTimingFunction: 'linear'
     },
     svg: {
-      width: size,
-      height: size,
-      position: 'relative'
+      height: baseSize,
+      position: 'relative',
+      transform: 'scale(' + zoom + ')',
+      width: baseSize
     },
     path: {
+      strokeDasharray: '89, 200',
+      strokeDashoffset: 0,
       stroke: props.color || palette.primary1Color,
       strokeLinecap: 'round',
       transition: _transitions2.default.create('all', '1.5s', null, 'ease-in-out')
@@ -80,7 +87,7 @@ function getStyles(props, context) {
   if (props.mode === 'determinate') {
     var relVal = getRelativeValue(value, min, max);
     styles.path.transition = _transitions2.default.create('all', '0.3s', null, 'linear');
-    styles.path.strokeDasharray = getArcLength(relVal, props) + ', ' + getArcLength(1, props);
+    styles.path.strokeDasharray = Math.round(relVal * 1.25) + ', 200';
   }
 
   return styles;
@@ -109,26 +116,25 @@ var CircularProgress = function (_Component) {
     }
   }, {
     key: 'scalePath',
-    value: function scalePath(path) {
+    value: function scalePath(path, step) {
       var _this2 = this;
-
-      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       if (this.props.mode !== 'indeterminate') return;
 
+      step = step || 0;
       step %= 3;
 
       if (step === 0) {
-        path.style.strokeDasharray = getArcLength(0, this.props) + ', ' + getArcLength(1, this.props);
+        path.style.strokeDasharray = '1, 200';
         path.style.strokeDashoffset = 0;
         path.style.transitionDuration = '0ms';
       } else if (step === 1) {
-        path.style.strokeDasharray = getArcLength(0.7, this.props) + ', ' + getArcLength(1, this.props);
-        path.style.strokeDashoffset = getArcLength(-0.3, this.props);
+        path.style.strokeDasharray = '89, 200';
+        path.style.strokeDashoffset = -35;
         path.style.transitionDuration = '750ms';
       } else {
-        path.style.strokeDasharray = getArcLength(0.7, this.props) + ', ' + getArcLength(1, this.props);
-        path.style.strokeDashoffset = getArcLength(-1, this.props);
+        path.style.strokeDasharray = '89, 200';
+        path.style.strokeDashoffset = -124;
         path.style.transitionDuration = '850ms';
       }
 
@@ -163,8 +169,7 @@ var CircularProgress = function (_Component) {
           style = _props.style,
           innerStyle = _props.innerStyle,
           size = _props.size,
-          thickness = _props.thickness,
-          other = _objectWithoutProperties(_props, ['style', 'innerStyle', 'size', 'thickness']);
+          other = _objectWithoutProperties(_props, ['style', 'innerStyle', 'size']);
 
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
@@ -178,18 +183,15 @@ var CircularProgress = function (_Component) {
           { ref: 'wrapper', style: prepareStyles((0, _simpleAssign2.default)(styles.wrapper, innerStyle)) },
           _react2.default.createElement(
             'svg',
-            {
-              viewBox: '0 0 ' + size + ' ' + size,
-              style: prepareStyles(styles.svg)
-            },
+            { style: prepareStyles(styles.svg) },
             _react2.default.createElement('circle', {
               ref: 'path',
               style: prepareStyles(styles.path),
-              cx: size / 2,
-              cy: size / 2,
-              r: (size - thickness) / 2,
+              cx: '25',
+              cy: '25',
+              r: '20',
               fill: 'none',
-              strokeWidth: thickness,
+              strokeWidth: '2.5',
               strokeMiterlimit: '20'
             })
           )
@@ -224,17 +226,13 @@ CircularProgress.propTypes = {
    */
   mode: _react.PropTypes.oneOf(['determinate', 'indeterminate']),
   /**
-   * The diameter of the progress in pixels.
+   * The size of the progress.
    */
   size: _react.PropTypes.number,
   /**
    * Override the inline-styles of the root element.
    */
   style: _react.PropTypes.object,
-  /**
-   * Stroke width in pixels.
-   */
-  thickness: _react.PropTypes.number,
   /**
    * The value of progress, only works in determinate mode.
    */
@@ -245,8 +243,7 @@ CircularProgress.defaultProps = {
   value: 0,
   min: 0,
   max: 100,
-  size: 40,
-  thickness: 3.5
+  size: 1
 };
 CircularProgress.contextTypes = {
   muiTheme: _react.PropTypes.object.isRequired
